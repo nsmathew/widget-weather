@@ -1,0 +1,107 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        function setTheme() {
+            console.log(localStorage.getItem('themeused'));
+            if (localStorage.getItem('themeused')) {
+                if (localStorage.getItem('themeused') == "light") {
+                    switchToLight();
+                } else if (localStorage.getItem('themeused') == "dark") {
+                    //console.log("In Dark")
+                    switchToDark();
+                }
+            } else {
+                switchToLight();
+            }
+        }
+        function switchToDark() {
+            document.body.style.background = "#2F3437"
+            document.getElementById("light").style.display = "none";
+            document.getElementById("dark").style.display = "block";
+            localStorage.setItem('themeused', "dark");
+        }
+        function switchToLight() {
+            document.body.style.background = "#FFFFFF"
+            document.getElementById("dark").style.display = "none";
+            document.getElementById("light").style.display = "block";
+            localStorage.setItem('themeused', "light");
+        }
+        !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+        document.addEventListener('readystatechange', function () {
+            if (document.readyState === "complete") {
+                setTheme();
+            }
+        });
+    </script>
+    <style>
+        .buttondivouter {
+            position: relative;
+            width: 300px;
+            height: 35px;
+            margin: 0 auto;
+            float: right;
+            opacity: 1;
+            transition: 3s;
+
+        }
+
+        .darkbuttonoverlap {
+            position: absolute;
+            z-index: 2;
+            height: 30px;
+            width: 80px;
+            top: 4px;
+            left: 180px;
+            opacity: 0;
+            transition: 3s;
+        }
+
+        .lightbuttonoverlap {
+            position: absolute;
+            z-index: 2;
+            height: 30px;
+            width: 80px;
+            top: 4px;
+            left: 80px;
+            opacity: 0;
+            transition: 3s;
+        }
+
+        .buttondivouter:hover .darkbuttonoverlap {
+            display: block;
+            opacity: 1;
+        }
+
+        .buttondivouter:hover .lightbuttonoverlap {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+    <div id="dark">
+        <!--Snippet from https://weatherwidget.io/ with a dark mode config-->
+        <a class="weatherwidget-io" href="https://forecast7.com/en/1d35103d82/singapore/" data-label_1="SINGAPORE"
+            data-label_2="WEATHER" data-font="Open Sans" data-days="5" data-theme="gray" data-basecolor="#2F3437"
+            data-highcolor="#ffffff" data-lowcolor="#ffffff" data-suncolor="#ffffff" data-mooncolor="#e0e0e0"
+            data-raincolor="#ffffff">SINGAPORE WEATHER</a>
+        <!--Snippet ends-->
+    </div>
+    <div id="light">
+        <!--Snippet from https://weatherwidget.io/ with a light mode config-->
+        <a class="weatherwidget-io" href="https://forecast7.com/en/1d35103d82/singapore/" data-label_1="SINGAPORE"
+            data-label_2="WEATHER" data-font="Open Sans" data-days="5" data-theme="gray" data-basecolor="#FFFFFF"
+            data-accent="#f2f2f2" data-textcolor="rgba(0, 0, 0, 0.9)" data-highcolor="rgba(0, 0, 0, 0.9)"
+            data-lowcolor="rgba(0, 0, 0, 0.9)" data-suncolor="#686868" data-mooncolor="#686868"
+            data-cloudcolor="#686868" data-cloudfill="#686868" data-raincolor="#686868"
+            data-snowcolor="#686868">SINGAPORE WEATHER</a>
+        <!--Snippet ends-->
+    </div>
+    <div class="buttondivouter">
+        <button class="darkbuttonoverlap" style="float: right;" onclick="switchToDark()">Dark</button>
+        <button class="lightbuttonoverlap" style="float: right;" onclick="switchToLight()">Light</button>
+    </div>
+
+</html>
